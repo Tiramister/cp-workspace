@@ -3,7 +3,7 @@
 import os
 import shutil
 
-skipped = ["Makefile", "setting"]
+skipped = ["Makefile", "setting", ".git", ".gitignore", "README.md"]
 
 for path in sorted(os.listdir("./")):
     if path in skipped:
