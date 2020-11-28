@@ -43,7 +43,6 @@
 | 変数 | 内容 |
 | :---: | :--- |
 | `EXPANDER` | ac-libraryに付属している`expander.py`のパス |
-| `OJCACHE`  | Online Judge Toolsの`download-history.jsonl`のパス |
 
 また、以下も変更する必要がある可能性がある。
 上手く変更すれば他言語にも対応できるかもしれない(多分スクリプト言語は厳しい)。

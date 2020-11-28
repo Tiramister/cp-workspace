@@ -6,7 +6,6 @@ CFLAGS = -std=c++17 -Wall -Wextra -fsanitize=address -fsanitize=undefined -g
 
 STGDIR = ../setting
 EXPANDER = ~/CompetitiveProgramming/ac-library/expander.py
-OJCACHE = ~/Library/Caches/online-judge-tools/download-history.jsonl
 
 
 default:
@@ -19,9 +18,8 @@ ex:
 	python3 $(EXPANDER) $(CODE)
 
 clean:
-	@rm -drf ./*
-	@cp -a $(STGDIR)/base/* .
-	@rm -f $(OJCACHE)
+	rm -drf ./*
+	cp -a $(STGDIR)/base/* .
 
 s:
 	python3 $(STGDIR)/submit.py
