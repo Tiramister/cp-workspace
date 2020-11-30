@@ -4,6 +4,8 @@ import sys
 import os
 import subprocess
 
+env = os.environ.copy()
+
 # the former is prior
 filenames = ["combined.cpp", "main.cpp"]
 
@@ -13,8 +15,14 @@ for filename in filenames:
 
         # bundle
         try:
-            proc = subprocess.run(["oj-bundle", filename],
-                                  stdout=subprocess.PIPE)
+            cmd = ["oj-bundle", filename]
+            # append include paths
+            for path in env["CPLUS_INCLUDE_PATH"].split(":"):
+                cmd.extend(["-I", path])
+
+            proc = subprocess.run(cmd,
+                                  stdout=subprocess.PIPE,
+                                  check=True)
         except:
             sys.exit("Error: Bundle failed.")
 
@@ -24,9 +32,12 @@ for filename in filenames:
 
         # submit
         try:
-            subprocess.run(["oj", "s", "tmp.cpp", "-y", "-w", "0"])
+            # pass env to use $CPLUS_INCLUDE_PATH
+            subprocess.run(["oj", "s", "tmp.cpp", "-y", "-w", "0"],
+                           check=True)
         except:
-            print("Error: Submission failed.")
+            os.unlink("tmp.cpp")
+            sys.exit("Error: Submission failed.")
 
         # remove the temporary file
         os.unlink("tmp.cpp")
