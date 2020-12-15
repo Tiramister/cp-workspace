@@ -2,11 +2,12 @@
 
 以下が使えることを想定している。
 
+* Makefile
 * Python3
 * [oj](https://github.com/online-judge-tools/oj)
-* [Online Judge Verification Helper](https://github.com/online-judge-tools/verification-helper) (bundleでのみ使う)
+* [Online Judge Verification Helper](https://github.com/online-judge-tools/verification-helper)
 
-また、一部macOSでしか使えない機能もある。
+またクリップボードへのコピー等、一部macOSでしか使えない機能がある。
 
 
 ## 使い方
@@ -15,7 +16,7 @@
 
 | コマンド | 内容 |
 | :---: | :--- |
-| `make gen` | 作業用ディレクトリを6つ作る。 |
+| `make gen` | 作業用ディレクトリを1つ作る。 |
 | `make gen D=10` | 作業用ディレクトリを10個作る(1個以上26個以下のみ指定可能)。 |
 | `make clean` | `setting`と`Makefile`以外のファイル・ディレクトリをすべて消す。 |
 
@@ -26,8 +27,9 @@
 | `make clean` | `make gen`直後の、`main.cpp`と`Makefile`しかない状態に戻す。 |
 | `make`       | コンパイルを行う。 |
 | `make ex`    | ac-libraryの展開を行い、`combined.cpp`を生成する。 |
-| `make cp`    | `main.cpp`をクリップボードにコピーする(macOSのみ)。 |
-| `make s`     | `main.cpp`(あれば`combined.cpp`)に`oj-bundle`を行ったコードを提出する。 |
+| `make b`     | `main.cpp`(あれば`combined.cpp`)に`oj-bundle`を行ったコード(`bundled.cpp`)を生成する。 |
+| `make cp`    | bundleされたコードをクリップボードにコピーする(macOSのみ)。 |
+| `make s`     | bundleされたコードを提出する。 |
 
 以下注意点。
 
@@ -35,7 +37,8 @@
 
 * `make s`を行うとき、過去に問題ページに対して`oj d`を行っていなければならない(そのうちURLを指定できるようにする予定)。
 
-* `make s`にて、環境変数`CPLUS_INCLUDE_PATH`で指定されているパスが全て`oj-bundle`に渡されるようになっている。
+* `make b`にて、環境変数`CPLUS_INCLUDE_PATH`で指定されているパスが全て`oj-bundle`に渡されるようになっている。
+
 
 ## 設定
 
@@ -45,7 +48,7 @@
 | :---: | :--- |
 | `EXPANDER` | ac-libraryに付属している`expander.py`のパス |
 
-以下の変数を上手く変更すれば、他言語にも対応できるかもしれない(多分スクリプト言語は厳しい)。
+以下の変数を上手く変更すれば、他言語にも対応できるかもしれない。
 
 | 変数 | 内容 |
 | :---: | :--- |
