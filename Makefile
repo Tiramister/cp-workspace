@@ -1,3 +1,5 @@
+D = 1 # default number of directories
+
 gen:
 	python3 setting/gen.py $(D)
 

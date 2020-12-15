@@ -1,5 +1,4 @@
 EXT = cpp
-CODE = main.$(EXT)
 
 CC = g++
 CFLAGS = -std=c++17 -Wall -Wextra -fsanitize=address -fsanitize=undefined -g
@@ -9,19 +8,24 @@ EXPANDER = ~/CompetitiveProgramming/ac-library/expander.py
 
 
 default:
-	$(CC) $(CFLAGS) $(CODE)
-
-cp:
-	cat $(CODE) | pbcopy
+	$(CC) $(CFLAGS) main.$(EXT)
 
 ex:
-	python3 $(EXPANDER) $(CODE)
+	python3 $(EXPANDER) main.$(EXT)
+
+b:
+	python3 $(STGDIR)/bundle.py
+
+cp:
+	make b
+	pbcopy < bundled.$(EXT)
+
+s:
+	make b
+	python3 $(STGDIR)/submit.py
 
 clean:
 	rm -drf ./*
 	cp -a $(STGDIR)/base/* .
-
-s:
-	python3 $(STGDIR)/submit.py
 
 .PHONY: clean

@@ -7,15 +7,14 @@ import shutil
 if not os.path.exists("./setting/base/"):
     sys.exit("Error: Directory Cpp/workspace/base/ not found")
 
-dirnum = 6  # default number of directories
-
 try:
     dirnum = int(sys.argv[1])
 except ValueError:
     sys.exit(
         "Error: Invalid argument for the number of directories (input an integer between 1 and 26)")
 except IndexError:
-    pass
+    sys.exit(
+        "Error: No argument for the number of directories (input an integer between 1 and 26)")
 
 print("The number of directories: {}".format(dirnum))
 if dirnum < 1 or 26 < dirnum:

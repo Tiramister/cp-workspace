@@ -16,4 +16,4 @@ for path in sorted(os.listdir("./")):
 
     elif os.path.isdir(path):
         shutil.rmtree(path)
-        print("{} is removed.".format((path)))
+        print("{} is removed.".format(path))
