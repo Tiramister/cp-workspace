@@ -1,14 +1,17 @@
 EXT = cpp
 
 CC = g++
-CFLAGS = -std=c++17 -Wall -Wextra -fsanitize=address -fsanitize=undefined -g
+CDEBUG_FLAGS = -std=c++17 -Wall -Wextra -fsanitize=address -fsanitize=undefined -g
+CFAST_FLAGS  = -std=c++17 -Wall -Wextra -O2
 
 STGDIR = ../setting
 EXPANDER = ~/CompetitiveProgramming/ac-library/expander.py
 
+d:
+	$(CC) $(CDEBUG_FLAGS) main.$(EXT)
 
-default:
-	$(CC) $(CFLAGS) main.$(EXT)
+f:
+	$(CC) $(CFAST_FLAGS) main.$(EXT)
 
 ex:
 	python3 $(EXPANDER) main.$(EXT)
@@ -17,12 +20,7 @@ b:
 	python3 $(STGDIR)/bundle.py
 
 cp:
-	make b
-	pbcopy < bundled.$(EXT)
-
-s:
-	make b
-	python3 $(STGDIR)/submit.py
+	pbcopy < main.$(EXT)
 
 clean:
 	rm -drf ./*
