@@ -1,9 +1,11 @@
 #include <iostream>
 #include <algorithm>
+#include <numeric>
 #include <vector>
 #include <string>
 
 using namespace std;
+using lint = long long;
 
 void solve() {
 }
