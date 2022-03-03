@@ -1,11 +1,14 @@
+# Workspace for Competitive Programming in C++
+
+C++ で競技プログラミングをする際の作業ディレクトリ。
+
+
 ## 想定環境
 
 以下が使えることを想定している。
 
 * Makefile
 * Python3
-* [oj](https://github.com/online-judge-tools/oj)
-* [Online Judge Verification Helper](https://github.com/online-judge-tools/verification-helper)
 
 またクリップボードへのコピー等、一部macOSでしか使えない機能がある。
 
@@ -15,43 +18,35 @@
 ### workspace
 
 | コマンド | 内容 |
-| :---: | :--- |
-| `make gen` | 作業用ディレクトリを1つ作る。 |
+| :-: | :-- |
+| `make gen`      | 作業用ディレクトリを1つ作る。 |
 | `make gen D=10` | 作業用ディレクトリを10個作る(1個以上26個以下のみ指定可能)。 |
-| `make clean` | `setting`と`Makefile`以外のファイル・ディレクトリをすべて消す。 |
+| `make clean`    | `setting` と `Makefile` 以外のファイル・ディレクトリをすべて消す。 |
 
 ### 作業用ディレクトリ
 
 | コマンド | 内容 |
-| :---: | :--- |
-| `make clean` | `make gen`直後の、`main.cpp`と`Makefile`しかない状態に戻す。 |
-| `make`       | コンパイルを行う。 |
-| `make ex`    | ac-libraryの展開を行い、`combined.cpp`を生成する。 |
-| `make b`     | `main.cpp`(あれば`combined.cpp`)に`oj-bundle`を行ったコード(`bundled.cpp`)を生成する。 |
-| `make cp`    | bundleされたコードをクリップボードにコピーする(macOSのみ)。 |
-| `make s`     | bundleされたコードを提出する。 |
-
-以下注意点。
-
-* デフォルトのコンパイルオプションは、デバッグ用のかなり遅いものである。コンパイルオプションを変えるときは`Makefile`内の`CFLAGS`を編集する。
-
-* `make s`を行うとき、過去に問題ページに対して`oj d`を行っていなければならない(そのうちURLを指定できるようにする予定)。
-
-* `make b`にて、環境変数`CPLUS_INCLUDE_PATH`で指定されているパスが全て`oj-bundle`に渡されるようになっている。
+| :-: | :-- |
+| `make clean` | `make gen` 直後の、 `main.cpp` と `Makefile` しかない状態に戻す。 |
+| `make (d)`   | デバッグコンパイルを行う。遅いがエラーが詳細に表示される。 |
+| `make f`     | リリースコンパイルを行う。速い。 |
+| `make ex`    | [ac-library](https://github.com/atcoder/ac-library) の展開を行い、 `combined.cpp` を生成する(後述の設定も参照)。 |
+| `make cp`    | `main.cpp` をクリップボードにコピーする(macOSのみ)。 |
 
 
 ## 設定
 
-使う前に、`setting/base/Makefile`で以下の変数を設定する必要がある。
+使う前に、 `setting/base/Makefile` で以下の変数を設定する必要がある。
 
 | 変数 | 内容 |
-| :---: | :--- |
-| `EXPANDER` | ac-libraryに付属している`expander.py`のパス |
+| :-: | :-- |
+| `EXPANDER` | [ac-library](https://github.com/atcoder/ac-library) に付属している `expander.py` へのパス。 |
 
 以下の変数を上手く変更すれば、他言語にも対応できるかもしれない。
 
 | 変数 | 内容 |
-| :---: | :--- |
-| `EXT` | ソースコードの拡張子 |
-| `CC`  | コンパイルコマンド |
-| `CFLAGS` | コンパイルオプション |
+| :-: | :-- |
+| `EXT`          | ソースコードの拡張子 |
+| `CC`           | コンパイルコマンド |
+| `CDEBUG_FLAGS` | デバッグコンパイルのオプション |
+| `CFAST_FLAGS`  | リリースコンパイルのオプション |
