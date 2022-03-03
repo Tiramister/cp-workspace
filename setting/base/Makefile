@@ -16,9 +16,6 @@ f:
 ex:
 	python3 $(EXPANDER) main.$(EXT)
 
-b:
-	python3 $(STGDIR)/bundle.py
-
 cp:
 	pbcopy < main.$(EXT)
 
