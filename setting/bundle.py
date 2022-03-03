@@ -1,5 +1,3 @@
-# executed in a working directory
-
 import sys
 import os
 import subprocess
@@ -11,7 +9,7 @@ filenames = ["combined.cpp", "main.cpp"]
 
 for filename in filenames:
     if os.path.exists(filename) and os.path.isfile(filename):
-        print("Bundled file: {}".format(filename))
+        print("[INFO] Bundled file: {}".format(filename))
 
         # bundle
         try:
@@ -24,13 +22,13 @@ for filename in filenames:
                                   stdout=subprocess.PIPE,
                                   check=True)
         except:
-            sys.exit("Error: Bundle failed.")
+            sys.exit("[ERROR] Bundle failed.")
 
         # write to temporary file
         with open("bundled.cpp", mode="w") as f:
             f.write(proc.stdout.decode("utf8"))
 
-        print("bundled.cpp is created.")
+        print("[INFO] bundled.cpp is created.")
         sys.exit()
 
-sys.exit("Error: No main file (combined.cpp or main.cpp) found.")
+sys.exit("[ERROR] No main file (combined.cpp or main.cpp) found.")
