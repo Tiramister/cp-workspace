@@ -5,7 +5,7 @@ CDEBUG_FLAGS = -std=c++17 -Wall -Wextra -fsanitize=address -fsanitize=undefined 
 CFAST_FLAGS  = -std=c++17 -Wall -Wextra -O2
 
 STGDIR = ../setting
-EXPANDER = ~/CompetitiveProgramming/ac-library/expander.py
+EXPANDER = ../ac-library/expander.py
 
 d:
 	$(CC) $(CDEBUG_FLAGS) main.$(EXT)
@@ -15,9 +15,6 @@ f:
 
 ex:
 	python3 $(EXPANDER) main.$(EXT)
-
-cp:
-	pbcopy < main.$(EXT)
 
 clean:
 	rm -drf ./*

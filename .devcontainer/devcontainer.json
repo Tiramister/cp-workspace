@@ -1,0 +1,30 @@
+{
+    "name": "cp-workspace",
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "args": {
+            "LOCAL_UID": "1000",
+            "LOCAL_USER": "vscode",
+            "LOCAL_PASSWORD": "vscode",
+        }
+    },
+
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind,consistency=cached",
+
+    "extensions": [
+        "ms-vscode.cpptools",
+        "jbenden.c-cpp-flylint",
+    ],
+    "settings": {
+        "editor.formatOnSave": true,
+        "C_Cpp.autocompleteAddParentheses": true,
+        "C_Cpp.clang_format_fallbackStyle": "Google",
+        "C_Cpp.default.cppStandard": "c++17",
+        "C_Cpp.formatting": "clangFormat",
+        "c-cpp-flylint.lizard.enable": false,
+        "c-cpp-flylint.flawfinder.enable": false,
+        "c-cpp-flylint.flexelint.enable": false,
+        "c-cpp-flylint.standard": ["c++17"],
+    }
+}
