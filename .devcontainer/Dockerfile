@@ -9,16 +9,16 @@ RUN apt-get update && \
 
 # add user
 ARG LOCAL_UID
-ARG LOCAL_USER
-ARG LOCAL_PASSWORD
+ENV LOCAL_UID=${LOCAL_UID:-1000} \
+    LOCAL_USER="vscode" \
+    LOCAL_PASSWORD="vscode"
 RUN useradd -m --uid ${LOCAL_UID} --groups sudo -s $(which bash) ${LOCAL_USER} && \
     echo "${LOCAL_USER}:${LOCAL_PASSWORD}" | chpasswd
-USER ${LOCAL_UID}
+USER ${LOCAL_USER}
 
-WORKDIR /workspace
+ENV HOME_DIR=/home/${LOCAL_USER}
+WORKDIR ${HOME_DIR}/workspace
 
-# download AtCoder Library
-RUN git clone https://github.com/atcoder/ac-library.git
 # online judge tools
 RUN pip install --upgrade pip && \
     pip install online-judge-tools

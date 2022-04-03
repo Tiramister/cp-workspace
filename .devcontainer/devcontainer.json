@@ -4,13 +4,12 @@
         "dockerfile": "./Dockerfile",
         "args": {
             "LOCAL_UID": "1000",
-            "LOCAL_USER": "vscode",
-            "LOCAL_PASSWORD": "vscode",
         }
     },
 
-    "workspaceFolder": "/workspace",
-    "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind,consistency=cached",
+    "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/home/vscode/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/home/vscode/workspace",
+    "postStartCommand": "if cd ac-library; then git pull && cd ..; else git clone https://github.com/atcoder/ac-library; fi",
 
     "extensions": [
         "ms-vscode.cpptools",
