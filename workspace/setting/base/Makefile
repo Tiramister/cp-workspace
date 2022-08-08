@@ -1,23 +1,23 @@
-EXT = cpp
+EXT=cpp
+CC=g++
+CCOMMON_FLAGS=-std=c++17 -Wall -Wextra
+CDEBUG_FLAGS=-fsanitize=address -fsanitize=undefined -g
+CFAST_FLAGS=-O2
 
-CC = g++
-CDEBUG_FLAGS = -std=c++17 -Wall -Wextra -fsanitize=address -fsanitize=undefined -g
-CFAST_FLAGS  = -std=c++17 -Wall -Wextra -O2
-
-STGDIR = ../setting
-EXPANDER = ../ac-library/expander.py
+STGDIR=../setting
+EXPANDER=../ac-library/expander.py
 
 d:
-	$(CC) $(CDEBUG_FLAGS) main.$(EXT)
+	${CC} ${CCOMMON_FLAGS} ${CDEBUG_FLAGS} main.${EXT}
 
 f:
-	$(CC) $(CFAST_FLAGS) main.$(EXT)
+	${CC} ${CCOMMON_FLAGS} ${CFAST_FLAGS} main.${EXT}
 
 ex:
-	python3 $(EXPANDER) main.$(EXT)
+	python3 ${EXPANDER} main.${EXT}
 
 clean:
 	rm -drf ./*
-	cp -a $(STGDIR)/base/* .
+	cp -a ${STGDIR}/base/* .
 
 .PHONY: clean
