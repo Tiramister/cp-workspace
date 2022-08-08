@@ -5,7 +5,7 @@ RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y --no-install-recommends \
     build-essential git ca-certificates sudo \
-    python python3-pip cppcheck
+    python3 python3-pip cppcheck
 
 # add user
 ARG LOCAL_UID
