@@ -3,7 +3,7 @@
     "build": {
         "dockerfile": "./Dockerfile",
         "args": {
-            "LOCAL_UID": "1000",
+            "LOCAL_UID": "501",
             "LOCAL_USER": "vscode",
             "LOCAL_PASSWORD": "vscode",
         }
