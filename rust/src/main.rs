@@ -1,0 +1,2 @@
+#[proconio::fastout]
+fn main() {}
