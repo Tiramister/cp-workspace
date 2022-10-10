@@ -1,2 +1,1 @@
-#[proconio::fastout]
-fn main() {}
+.././cache/37e3ecee968b9a80ecfa9c786b4e326ad0820440/main.rs
