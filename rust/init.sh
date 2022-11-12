@@ -1,10 +1,8 @@
 #!/bin/sh
 
 # 標準エラー出力に出力してからエラーコード1で終了
-function abort() {
-  if [ $# -ne 0 ]; then
-    echo $@ >&2
-  fi
+abort() {
+  if [ $# -ne 0 ]; then echo $@ >&2; fi
   exit 1
 }
 
@@ -12,7 +10,7 @@ if [ $# -eq 0 ]; then
   abort "Usage: ./init.sh <problem name or problem url>"
 fi
 
-problem="$1"
+problem="$1" 
 hashed=$(echo "${problem}" | sha1sum - | head -c 40)
 
 problem_dir="./cache/${hashed}"
