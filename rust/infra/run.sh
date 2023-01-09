@@ -13,6 +13,6 @@ if ! docker container ls -a | grep -q 'cp-rust-container'; then
 fi
 
 docker container start cp-rust-container
-docker container exec -it cp-rust-container /bin/zsh
+docker container exec -it --env "TERM=xterm-256color" cp-rust-container /bin/zsh
 docker container stop cp-rust-container
 

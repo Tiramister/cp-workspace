@@ -19,7 +19,7 @@ RUN rustup toolchain install 1.42.0-x86_64-unknown-linux-gnu
 RUN rustup component add rust-analyzer
 
 ### Competitive programming tools
-RUN cargo install cargo-compete cargo-equip
+RUN cargo install cargo-compete cargo-equip cargo-udeps
 
 ### Dotfiles
 # Avoid caching. See: https://stackoverflow.com/a/39278224
