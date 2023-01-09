@@ -5,8 +5,9 @@ FROM archlinux:base-devel
 RUN pacman --noconfirm -Syy vim git zsh zsh-completions nodejs npm
 
 ### Add user
+ARG uid=501
 ARG user=tiramister
-RUN useradd -m -G wheel $user && passwd -d $user
+RUN useradd -m -g wheel -u $uid -s /bin/zsh $user && passwd -d $user
 USER $user
 ENV HOME /home/$user
 WORKDIR $HOME
@@ -26,4 +27,7 @@ ADD https://api.github.com/repos/Tiramister/dotfiles/git/refs/heads/main version
 RUN git clone https://github.com/Tiramister/dotfiles.git \
   && cd dotfiles && ./init.sh
 RUN rm version.json
+
+### Keep running
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 
