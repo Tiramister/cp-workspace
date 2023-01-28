@@ -21,13 +21,6 @@ RUN rustup component add rust-analyzer
 ### Competitive programming tools
 RUN cargo install cargo-compete cargo-equip cargo-udeps
 
-### Dotfiles
-# Avoid caching. See: https://stackoverflow.com/a/39278224
-ADD https://api.github.com/repos/Tiramister/dotfiles/git/refs/heads/main version.json
-RUN git clone https://github.com/Tiramister/dotfiles.git \
-  && cd dotfiles && ./init.sh
-RUN rm version.json
-
 ### Keep running
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
