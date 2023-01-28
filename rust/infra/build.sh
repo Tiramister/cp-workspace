@@ -5,10 +5,10 @@ if [ ${PWD##*/} != 'infra' ]; then
   exit 1
 fi
 
-if ! docker container ls -a | grep -q 'cp-rust-container'; then
+if docker container ls -a | grep -q 'cp-rust-container'; then
   docker container rm cp-rust-container
 fi
-if ! docker image ls -a | grep -q 'cp-rust-image'; then
+if docker image ls -a | grep -q 'cp-rust-image'; then
   docker image rm cp-rust-image
 fi
 
