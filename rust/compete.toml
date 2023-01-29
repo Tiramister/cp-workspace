@@ -15,9 +15,6 @@ proconio = { version = "=0.3.6", features = ["derive"] }
 itertools = "=0.9.0"
 itertools-num = "=0.1.3"
 '''
-dev-dependencies = '''
-#atcoder-202004-lock = { git = "https://github.com/qryxip/atcoder-202004-lock" }
-'''
 
 [new]
 kind = "cargo-compete"
