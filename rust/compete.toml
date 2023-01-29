@@ -24,3 +24,7 @@ path = "./{{ contest }}"
 [test]
 toolchain = "1.42.0"
 
+[submit.transpile]
+kind = "command"
+args = ["cargo", "equip", "--exclude-atcoder-crates", "--remove", "docs", "--minify", "libs", "--bin", "{{ bin_name }}"]
+
