@@ -7,10 +7,10 @@ fn main() {
 '''
 
 [template.new]
-edition = "2018"
+edition = "2021"
 dependencies = '''
-proconio = { version = "=0.3.6", features = ["derive"] }
-itertools = "=0.9.0"
+proconio = { version = "=0.4.5", features = ["derive"] }
+itertools = "=0.11.0"
 itertools-num = "=0.1.3"
 '''
 
@@ -20,9 +20,10 @@ platform = "atcoder"
 path = "./{{ contest }}"
 
 [test]
-toolchain = "1.42.0"
+toolchain = "1.70.0"
 
-[submit.transpile]
+[submit]
 kind = "command"
-args = ["cargo", "equip", "--exclude-atcoder-crates", "--remove", "docs", "--minify", "libs", "--bin", "{{ bin_name }}"]
+args = ["cargo", "equip", "--exclude-atcoder-202301-crates", "--remove", "docs", "--minify", "libs", "--bin", "{{ bin_name }}"]
+language_id = "5054" # Atcoder 202301
 
