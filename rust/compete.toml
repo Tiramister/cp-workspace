@@ -24,6 +24,6 @@ toolchain = "1.70.0"
 
 [submit]
 kind = "command"
-args = ["cargo", "equip", "--exclude-atcoder-202301-crates", "--remove", "docs", "--minify", "libs", "--bin", "{{ bin_name }}"]
+args = ["cargo", "equip", "--exclude-atcoder-202301-crates", "--exclude", "proconio", "itertools", "--remove", "docs", "--minify", "libs", "--bin", "{{ bin_name }}"]
 language_id = "5054" # Atcoder 202301
 
