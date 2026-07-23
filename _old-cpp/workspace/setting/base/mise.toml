@@ -1,0 +1,23 @@
+[vars]
+common_flags = "-std=c++17 -Wall -Wextra"
+debug_flags = "-fsanitize=address -fsanitize=undefined -g"
+fast_flags = "-O2"
+
+[tasks.debug]
+alias = "d"
+description = "デバッグコンパイルを行う。"
+run = "g++-15 {{ vars.common_flags }} {{ vars.debug_flags }} main.cpp"
+
+[tasks.fast]
+alias = "f"
+description = "リリースコンパイルを行う。"
+run = "g++-15 {{ vars.common_flags }} {{ vars.fast_flags }} main.cpp"
+
+[tasks.expand]
+alias = "ex"
+description = "ac-library を展開する。"
+run = "python3 ../ac-library/expander.py main.cpp"
+
+[tasks.clean]
+description = "ディレクトリを生成直後の状態に戻す。"
+run = "rm -drf ./* && cp -a ../setting/base/* ."

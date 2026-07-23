@@ -1,0 +1,13 @@
+[tools]
+python = "3.12"
+
+[tasks.gen]
+description = "作業用ディレクトリを作る。"
+usage = '''
+arg "[cnt]" help="ディレクトリの個数 (1以上26以下)" default="1"
+'''
+run = "python3 setting/gen.py ${usage_cnt}"
+
+[tasks.clean]
+description = "設定関連以外のファイル・ディレクトリをすべて消す。"
+run = "python3 setting/clean.py"

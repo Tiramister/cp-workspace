@@ -1,0 +1,41 @@
+[tools]
+cmake = '4.3.1'
+deno = '2.7.12'
+uv = "latest"
+
+[vars]
+cxx_path = '/usr/bin/clang++-18'
+
+[tasks.init]
+alias = 'i'
+description = '指定した問題IDの作業ディレクトリを復元する。なければ新規作成する。'
+usage = '''
+arg '<id>' help='問題ID'
+'''
+run = 'deno run --allow-read --allow-write ./config/scripts/init_workspace.ts ${usage_id}'
+
+[tasks.run]
+alias = 'r'
+description = 'リリースビルドを行う。'
+run = [
+  'cmake -S ./workspace -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER={{vars.cxx_path}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
+  'cmake --build ./build',
+  './build/a.out',
+]
+
+[tasks.debug]
+alias = 'd'
+description = 'デバッグビルドを行う。'
+run = [
+  'cmake -S ./workspace -B ./build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER={{vars.cxx_path}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
+  'cmake --build ./build',
+  './build/a.out',
+]
+
+[tasks.bundle]
+alias = 'b'
+description = 'ライブラリを展開する。'
+run = [
+  'deno run --allow-read --allow-write ./config/scripts/bundle.ts',
+  'clang-format -i ./workspace/bundled.cpp',
+]

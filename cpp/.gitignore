@@ -1,3 +1,7 @@
-## working directories
-[a-z]
+cmake-build-debug/
+workspace/
+archives/
+build/
 ac-library/
+
+.idea/

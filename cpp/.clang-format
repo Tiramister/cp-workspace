@@ -1,0 +1,8 @@
+BasedOnStyle: LLVM
+Standard: c++20  # C++23 はまだない
+
+AlwaysBreakTemplateDeclarations: Yes
+IndentCaseBlocks: false
+IndentCaseLabels: true
+LambdaBodyIndentation: Signature
+NamespaceIndentation: All
