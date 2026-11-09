@@ -1,107 +1,131 @@
 #include <algorithm>
-#include <concepts>
 #include <format>
 #include <functional>
 #include <iostream>
 #include <iterator>
+#include <map>
 #include <numeric>
-#include <print>
 #include <queue>
 #include <ranges>
-#include <sstream>
 #include <string>
-#include <type_traits>
 #include <vector>
 
-using i32 = int;
-using i64 = long long int;
-using f64 = double;
+/****************
+ * Type Aliases *
+ ****************/
 
-/*******
- * I/O *
- *******/
-
-template <class T>
-  requires requires(std::istream &is, T &x) {
-    { is >> x } -> std::convertible_to<std::istream &>;
-  }
-auto scan() -> T {
-  T x;
-  std::cin >> x;
-  return x;
-}
-
-template <class... Args>
-auto eprint(std::format_string<Args...> fmt, const Args &...args) -> void {
-  std::print(stderr, fmt, args...);
-}
-
-template <class... Args>
-auto eprintln(std::format_string<Args...> fmt, const Args &...args) -> void {
-  std::println(stderr, fmt, args...);
-}
-
-/*************
- * container *
- *************/
+using LL = long long int;
+using S = std::string;
 
 template <class T>
-concept is_not_void = !std::is_void_v<T>;
+using V = std::vector<T>;
+using VLL = V<LL>;
+using VVLL = V<V<LL>>;
+using VS = V<S>;
 
-template <class F>
-  requires is_not_void<std::invoke_result_t<F>>
-auto vec(i32 n, F f) {
-  using T = std::invoke_result_t<F>;
+template <class T, class U>
+using P = std::pair<T, U>;
+using PLL = P<LL, LL>;
 
-  std::vector<T> v;
-  v.reserve(n);
-  for (const auto _ : std::views::iota(0, n)) {
-    v.push_back(f());
+/*********
+ * Input *
+ *********/
+template <class... Ts>
+void read_multiple(Ts &...args) {
+  ((std::cin >> args), ...);
+}
+
+template <class T>
+V<T> read_vector(int n) {
+  auto v = V<T>(n);
+  for (auto &x : v) {
+    std::cin >> x;
   }
   return v;
 }
 
-template <class F>
-  requires is_not_void<std::invoke_result_t<F, i32>>
-auto vec(i32 n, F f) {
-  using T = std::invoke_result_t<F, i32>;
-
-  std::vector<T> v;
-  v.reserve(n);
-  for (const auto i : std::views::iota(0, n)) {
-    v.push_back(f(i));
-  }
-  return v;
-}
-
-template <std::ranges::input_range R, class F>
-  requires is_not_void<std::invoke_result_t<F, std::ranges::range_value_t<R>>>
-auto map_vec(R &&range, F f) {
-  using T = std::invoke_result_t<F, std::ranges::range_value_t<R>>;
-
-  std::vector<T> results;
-  std::ranges::transform(std::forward<R>(range),
-                         std::back_insert_iterator(results), f);
-  return results;
-}
-
-template <std::ranges::input_range R>
-  requires requires(std::stringstream &ss, R &r) {
-    ss << *std::ranges::begin(r);
-  }
-auto join(R &&range, const std::string &&sep = " ") -> std::string {
-  std::stringstream ss;
-  bool first = true;
-  for (const auto &x : std::forward<R>(range)) {
-    if (first) {
-      first = false;
-    } else {
-      ss << sep;
+template <class T>
+V<V<T>> read_vector_vector(int n, int m) {
+  auto vv = V(n, V<T>(m));
+  for (auto &v : vv) {
+    for (auto &x : v) {
+      std::cin >> x;
     }
-    ss << x;
   }
-  return ss.str();
+  return vv;
 }
+
+#define RLL(...)                                                               \
+  LL __VA_ARGS__;                                                              \
+  read_multiple(__VA_ARGS__);
+#define RS(...)                                                                \
+  S __VA_ARGS__;                                                               \
+  read_multiple(__VA_ARGS__)
+#define RVLL(v, n) VLL v = read_vector<LL>(n);
+#define RVVLL(vv, n, m) VVLL vv = read_vector_vector<LL>(n, m);
+#define RVS(ss, n) VS ss = read_vector<S>(n);
+
+/**********
+ * Output *
+ **********/
+
+template <class... Ts>
+void PR(Ts... values) {
+  ((std::cout << values << ' '), ...);
+  std::cout << '\n';
+}
+
+template <class T>
+void PRV(V<T> v) {
+  for (const auto &x : v) {
+    std::cout << x << ' ';
+  }
+  std::cout << '\n';
+}
+
+template <class T>
+void PRVV(V<V<T>> vv) {
+  for (const auto &v : vv) {
+    for (const auto &x : v) {
+      std::cout << x << ' ';
+    }
+    std::cout << '\n';
+  }
+}
+
+template <class... Ts>
+void EPR(Ts... values) {
+  ((std::cerr << values << ' '), ...);
+  std::cerr << '\n';
+}
+
+template <class T>
+void EPRV(V<T> v) {
+  for (const auto &x : v) {
+    std::cerr << x << ' ';
+  }
+  std::cerr << '\n';
+}
+
+template <class T>
+void EPRVV(V<V<T>> vv) {
+  for (const auto &v : vv) {
+    for (const auto &x : v) {
+      std::cerr << x << ' ';
+    }
+    std::cerr << '\n';
+  }
+}
+
+/**********
+ * Repeat *
+ **********/
+
+#define REP(x, v) for (auto &x : v)
+#define IREP(i, n) for (LL i = 0; i < (LL)(n); i++)
+#define IREPR(i, l, r) for (LL i = (LL)(l); i < (LL)(r); i++)
+#define IRREP(i, n) for (LL i = (LL)(n) - 1; i >= 0; i--)
+#define IRREPR(i, l, r) for (LL i = (LL)(r) - 1; i >= (LL)(l); i--)
 
 /********
  * misc *
